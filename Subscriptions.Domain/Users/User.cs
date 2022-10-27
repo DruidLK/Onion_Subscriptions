@@ -1,5 +1,4 @@
 ﻿using Subscriptions.Domain.Base;
-using Subscriptions.Domain.Subscriptions;
 using Subscriptions.Domain.Users;
 
 namespace Subscriptions.Domain.Customers
@@ -23,7 +22,6 @@ namespace Subscriptions.Domain.Customers
             string firstName,
             string lastName,
             string email,
-            decimal moneySpent,
             DateTimeOffset createdDate,
             DateTimeOffset updatedDate
             )
@@ -31,9 +29,9 @@ namespace Subscriptions.Domain.Customers
             this.FirstName = firstName;
             this.LastName = lastName;
             this.Email = email;
-            this.MoneySpent = moneySpent;
             this.CreatedDate = createdDate;
             this.UpdatedDate = updatedDate;
+            this.Status = UserStatus.Activated;
         }
     }
 }

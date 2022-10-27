@@ -20,6 +20,7 @@ namespace Subscriptions.Infrastructure.Configurations.UsersConfig
                     v => (UserStatus)Enum.Parse(typeof(UserStatus), v));
 
             builder.Property(user => user.Email).HasMaxLength(128).IsRequired();
+            builder.HasIndex(user => user.Email).IsUnique();
             builder.Property(user => user.MoneySpent).HasColumnType("money");
             builder.Property(user => user.CreatedDate).IsRequired();
             builder.Property(user => user.UpdatedDate).IsRequired();
