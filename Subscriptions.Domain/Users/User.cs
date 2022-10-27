@@ -6,6 +6,9 @@ namespace Subscriptions.Domain.Customers
 {
     public sealed class User : Entity
     {
+        private User()
+        { }
+
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public UserStatus Status { get; private set; }
@@ -14,7 +17,7 @@ namespace Subscriptions.Domain.Customers
         public DateTimeOffset CreatedDate { get; private set; }
         public DateTimeOffset UpdatedDate { get; private set; }
 
-        public IEnumerable<Subscription> Subscriptions { get; set; }
+        //public IEnumerable<Subscription> Subscriptions { get; set; }
 
         public User(
             string firstName,
@@ -29,7 +32,7 @@ namespace Subscriptions.Domain.Customers
             this.LastName = lastName;
             this.Email = email;
             this.MoneySpent = moneySpent;
-            this.CreatedDate = CreatedDate;
+            this.CreatedDate = createdDate;
             this.UpdatedDate = updatedDate;
         }
     }

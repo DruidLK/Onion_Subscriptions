@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Subscriptions.Infrastructure;
 
 namespace Subscriptions.API
 {
@@ -19,6 +20,7 @@ namespace Subscriptions.API
         {
 
             services.AddControllers();
+            services.AddInfrastructure(this.Configuration);
             SwaggerDoc(services);
         }
 
