@@ -1,59 +1,67 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace Subscriptions.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
+        public Startup(IConfiguration configuration) =>
             Configuration = configuration;
-        }
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
             services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Subscriptions.API", Version = "v1" });
-            });
+            SwaggerDoc(services);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        private static void SwaggerDoc(IServiceCollection services) =>
+            services.AddSwaggerGen(config =>
+            {
+                var openApiInfo = new OpenApiInfo
+                {
+                    Title = "Subscriptions Api",
+                    Description = "Customer can subscribe to a product, N-Tier without CQRS Event Driven",
+                    Version = "Version 1.0"
+                };
+
+                var openApiContact = new OpenApiContact
+                {
+                    Email = "fadidib23@hotmail.com",
+                    Name = "fadi dib",
+                    Url = new Uri("https://www.linkedin.com/in/fadi-dib-827365226/")
+                };
+
+                config.SwaggerDoc(
+                    name: "v1",
+                    info: openApiInfo);
+            });
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Subscriptions.API v1"));
+                app.UseSwaggerUI(config =>
+                    config.SwaggerEndpoint(
+                        url: "/swagger/v1/swagger.json",
+                        name: "Subscriptions.API v1"));
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+                endpoints.MapControllers());
         }
     }
 }
