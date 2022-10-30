@@ -2,7 +2,7 @@
 using Subscriptions.Domain.Customers;
 using Subscriptions.Infrastructure.StorageBroker;
 
-namespace Subscriptions.Infrastructure.Repositories.UsersRepositories
+namespace Subscriptions.Infrastructure.Repositories.Commands.UsersRepositories
 {
     public sealed class UserRepository : IUserRepository
     {

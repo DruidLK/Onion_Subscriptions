@@ -4,7 +4,7 @@ using Subscriptions.Domain.Abstractions.IUnitOfWork;
 
 namespace Subscriptions.Applications.UsersApplications.Commands
 {
-    public sealed class UserApplication
+    public sealed class UserApplication : IUserApplication
     {
         private readonly IDateTimeBroker dateTimeBroker;
         private readonly IUserRepository userRepository;
