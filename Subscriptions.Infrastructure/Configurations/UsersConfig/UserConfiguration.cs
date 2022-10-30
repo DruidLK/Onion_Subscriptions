@@ -9,7 +9,7 @@ namespace Subscriptions.Infrastructure.Configurations.UsersConfig
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable(nameof(User));
+            builder.ToTable("Profiles");
             builder.HasKey(user => user.Id);
             builder.Property(user => user.Id).ValueGeneratedOnAdd().IsRequired();
             builder.Property(user => user.FirstName).HasMaxLength(100).IsRequired();
